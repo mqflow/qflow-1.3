@@ -869,8 +869,13 @@ int main (int argc, char* argv[]) {
 			    snprintf(currnode->mapped, 12, "*%d", net_idx);
 			else {
 			    pname = strrchr(tokens[2], '/') + 1;
-			    snprintf(currnode->mapped, 12, "*%d%c%s", nid++,
+			    if (pname)
+				snprintf(currnode->mapped, 12, "*%d%c%s", nid++,
 					delimiter, pname);
+			    else
+				/* Node name is probably hosed, but don't crash */
+				snprintf(currnode->mapped, 12, "*%d%c%s", nid++,
+					delimiter, tokens[2]);
 			}
 
                         if (verbose > 1) print_node(currnode);
@@ -970,8 +975,13 @@ int main (int argc, char* argv[]) {
 			snprintf(currnode->mapped, 12, "*%d", net_idx);
 		    else {
 			pname = strrchr(tokens[t], '/') + 1;
-			snprintf(currnode->mapped, 12, "*%d%c%s", nid++, delimiter,
-					pname);
+			if (pname)
+			    snprintf(currnode->mapped, 12, "*%d%c%s", nid++,
+					delimiter, pname);
+			else
+			    /* Node name is probably hosed, but don't crash */
+			    snprintf(currnode->mapped, 12, "*%d%c%s", nid++,
+					delimiter, tokens[t]);
 		    }
 
                     if (verbose > 1) print_node(currnode);
