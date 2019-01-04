@@ -240,7 +240,7 @@ def read_spice(filein, fileout, celldefs, debug, modelfile):
         for line in spilines:
             lineno += 1
 
-            # Substitute for all characters "[" and "]"
+            # Substitute for all characters "[" and "]", to avoid nesting brackets.
             line = line.replace('[', '_').replace(']', '_')
 
             # All comment lines go to the output
@@ -480,7 +480,6 @@ def read_spice(filein, fileout, celldefs, debug, modelfile):
                     # Note:  Cells with output but no input are tie-high or tie-low,
                     # and do not map to LUTs.  Cells with no output are non-functional
                     # (e.g., antenna tie-downs).
-
                     if len(inlist) == 0:
                         if cellrec['function'][0] == '1':
                             print('A' + instname + ' ' + outtext + ' done', file=ofile)
@@ -555,12 +554,14 @@ def read_spice(filein, fileout, celldefs, debug, modelfile):
                     inum = 0
                     onum = 0
                     for pinname in pindefs:
-                        if pindefs[pinname] == 'input':
-                            inum += 1
-                            print("AA2D" + str(inum) + " [a_" + pinname + "] [" + pinname + "] todig_" + vddname, file=ofile)
-                        elif pindefs[pinname] == 'output':
+                        if pindefs[pinname] == 'output':
                             onum += 1
                             print("AD2A" + str(onum) + " [" + pinname + "] [a_" + pinname + "] toana_" + vddname, file=ofile)
+                        # (Previously 'input': this makes sure that even unused
+                        # power and ground nets are not left floating.)
+                        else:
+                            inum += 1
+                            print("AA2D" + str(inum) + " [a_" + pinname + "] [" + pinname + "] todig_" + vddname, file=ofile)
                     print("", file=ofile)
 
                 echoout =  True
