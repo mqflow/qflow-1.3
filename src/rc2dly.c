@@ -868,10 +868,10 @@ int main (int argc, char* argv[]) {
 			if (!strncmp(tokens[2], "PIN/", 4))
 			    snprintf(currnode->mapped, 12, "*%d", net_idx);
 			else {
-			    pname = strrchr(tokens[2], '/') + 1;
+			    pname = strrchr(tokens[2], '/');
 			    if (pname)
 				snprintf(currnode->mapped, 12, "*%d%c%s", nid++,
-					delimiter, pname);
+					delimiter, ++pname);
 			    else
 				/* Node name is probably hosed, but don't crash */
 				snprintf(currnode->mapped, 12, "*%d%c%s", nid++,
