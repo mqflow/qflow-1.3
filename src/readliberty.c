@@ -1127,6 +1127,7 @@ read_liberty(char *libfile, char *pattern)
 
 	    case TIMING:
 
+		/* To do:  Record delays separately for each pin, or average */
 		if (!strcmp(token, "}")) {
 		    section = PINDEF;			// End of timing def
 		}
@@ -1186,8 +1187,13 @@ read_liberty(char *libfile, char *pattern)
 				while ((iptr = strchr(iptr, ',')) != NULL) {
 				    iptr++;
 				    i++;
-				    sscanf(iptr, "%lg", &newcell->times[i]);
-				    newcell->times[i] *= time_unit;
+				    if (i < reftable->tsize) {
+					sscanf(iptr, "%lg", &newcell->times[i]);
+					newcell->times[i] *= time_unit;
+				    } else {
+					fprintf(stderr, "Too many entries for table"
+						" (line %d).\n", libCurrentLine);
+				    }
 				}
 			    }
 
@@ -1230,8 +1236,14 @@ read_liberty(char *libfile, char *pattern)
 				while ((iptr = strchr(iptr, ',')) != NULL) {
 				    iptr++;
 				    i++;
-				    sscanf(iptr, "%lg", &newcell->caps[i]);
-				    newcell->caps[i] *= cap_unit;
+				    if (i < reftable->csize) {
+					sscanf(iptr, "%lg", &newcell->caps[i]);
+					newcell->caps[i] *= cap_unit;
+				    }
+				    else {
+					fprintf(stderr, "Too many entries for table"
+						" (line %d).\n", libCurrentLine);
+				    }
 				}
 			    }
 
