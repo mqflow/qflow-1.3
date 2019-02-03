@@ -198,6 +198,7 @@ while ($#argv > 0)
 	    break
 	 else if ($modulename == "") then
 	    set modulename=$argv[1]
+	    shift
 	    break
 	 else
 	    echo "Argument $argv[1] after module name $modulename"
