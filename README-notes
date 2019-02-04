@@ -27,4 +27,27 @@ Build commands:
     make
     make install
 
+Tutorial
+==========
+
+ install python3-tkinter
+
+ technology lib
+  http://opencircuitdesign.com/qflow/welcome.html
+
+    wget http://vlsiarch.ecen.okstate.edu/flows/MOSIS_SCMOS/osu_soc_v2.7/osu_soc_v2.7.tar.gz
+    mkdir osu_soc_v2.7
+    cd osu_soc_v2.7
+    tar xf ../osu_soc_v2.7.tar.gz
+
+ run commands: 
+
+    mkdir test
+    cd test
+    wget http://opencircuitdesign.com/qflow/example/map9v3.v
+    #qflow gui
+    qflow -T osu035 map9v3
+
+
+
 
