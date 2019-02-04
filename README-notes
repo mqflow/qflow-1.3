@@ -1,0 +1,30 @@
+
+README-notes
+2019-2-3
+
+
+Origin
+========
+
+remote.origin.url=git://opencircuitdesign.com/qflow-1.3
+
+
+Build
+=======
+
+Dependent packages built in this order:
+
+    magic, netgen, qrouter, graywolf, yosys
+
+Build commands:
+
+    ./configure --with-graywolf=<graywolf-prefix-path>/bin \
+                --with-netgen=<netgen-prefix-path>/bin     \
+                --with-qrouter=<qrouter-prefix-path>/bin   \
+                --with-yosys=<yosys-prefix-path>/usr/local/bin  \
+                --with-magic=<magic-prefix-path>/bin       \
+                --prefix=<prefix-path>
+    make
+    make install
+
+
