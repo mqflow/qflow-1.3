@@ -27,10 +27,15 @@ Build commands:
     make
     make install
 
-Tutorial
-==========
+
+Runtime depency
+=================
 
  install python3-tkinter
+
+
+Tutorial
+==========
 
  technology lib
   http://opencircuitdesign.com/qflow/welcome.html

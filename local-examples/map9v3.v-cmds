@@ -1,0 +1,12 @@
+
+map9v3.v-cmds
+
+
+wget http://opencircuitdesign.com/qflow/example/map9v3.v
+
+
+ls -l
+-rw-rw-r--.     2026 Jun  6  2017 map9v3.v
+-rw-rw-r--.       60 Feb  5 08:19 map9v3.v-cmd
+
+
