@@ -412,10 +412,10 @@ set diexbot_um [expr ($diexbot - $pitchx) / ($scale + 0.0)]
 set diextop_um [expr ($diextop + $pitchx) / ($scale + 0.0)]
 set dieybot_um [expr ($dieybot - $pitchy) / ($scale + 0.0)]
 set dieytop_um [expr ($dieytop + $pitchy) / ($scale + 0.0)]
-set corexbot_um [expr $corexbot / ($scale + 0.0)]
-set corextop_um [expr ($corextop + $pitchx) / ($scale + 0.0)]
-set coreybot_um [expr $coreybot / ($scale + 0.0)]
-set coreytop_um [expr ($coreytop + $pitchy) / ($scale + 0.0)]
+set corexbot_um [expr ($corexbot - $halfpitchx) / ($scale + 0.0)]
+set corextop_um [expr ($corextop + $halfpitchx) / ($scale + 0.0)]
+set coreybot_um [expr ($coreybot - $halfpitchx) / ($scale + 0.0)]
+set coreytop_um [expr ($coreytop + $halfpitchy) / ($scale + 0.0)]
 
 #-----------------------------------------------------------------
 # Finish route configuration file

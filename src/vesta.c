@@ -81,7 +81,7 @@
 
 #define LIB_LINE_MAX  65535
 
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__OpenBSD__)
 // Linux defines a comparison function prototype, the Mac doesn't. . .
 typedef int (*__compar_fn_t)(const void *, const void *);
 #endif
@@ -531,7 +531,7 @@ advancetoken(FILE *flib, char delimiter)
 
     // Final:  Remove trailing whitespace
     tptr = token + strlen(token) - 1;
-    while (isblank(*tptr)) {
+    while ((tptr >= token) && isblank(*tptr)) {
         *tptr = '\0';
         tptr--;
     }

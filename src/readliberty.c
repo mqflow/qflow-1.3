@@ -167,10 +167,11 @@ advancetoken(FILE *flib, char delimiter)
 
     // Remove any trailing whitespace
     tptr = token + strlen(token) - 1;
-    while (isblank(*tptr)) {
-	*tptr = '\0';
+    while ((tptr >= token) && isblank(*tptr)) {
 	tptr--;
     }
+    *(tptr + 1) = '\0';
+
     // Final:  Remove any surrounding quotes
     if ((*token == '\"') && (*tptr == '\"') && (token != tptr)) {
 	*tptr = '\0';
@@ -1267,14 +1268,18 @@ read_liberty(char *libfile, char *pattern)
 				    iptr = token;
 				    for (i = 0; i < reftable->tsize; i++) {
 					for (j = 0; j < reftable->csize; j++) {
-					    while (*iptr == ' ' || *iptr == '\"' ||
-							*iptr == ',' || *iptr == '\\')
+					    while (*iptr && (*iptr == ' ' ||
+							*iptr == '\"' ||
+							*iptr == ',' ||
+							*iptr == '\\'))
 						iptr++;
 					    sscanf(iptr, "%lg", &gval);
 					    *(newcell->values + j * reftable->tsize
 							+ i) = gval * time_unit;
-					    while (*iptr != ' ' && *iptr != '\"' &&
-							*iptr != ',' || *iptr == '\\')
+					    while (*iptr && (*iptr != ' ' &&
+							*iptr != '\"' &&
+							*iptr != ',' ||
+							*iptr == '\\'))
 						iptr++;
 					}
 				    }

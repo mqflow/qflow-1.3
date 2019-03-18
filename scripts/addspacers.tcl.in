@@ -639,6 +639,7 @@ if {[llength $fillcells] == 0} {
 
 set testpitch 0
 foreach layer $layers {
+    if {![dict exists $layer type]} {continue}
     if {[dict get $layer type] != "ROUTING"} {continue}
     set layerpitch [dict get $layer xpitch]
     if {$layerpitch > 0} {
