@@ -37,7 +37,7 @@ Runtime depency
 Tutorial
 ==========
 
- technology lib
+ technology lib (this step is not required for qflow 1.3)
   http://opencircuitdesign.com/qflow/welcome.html
 
     wget http://vlsiarch.ecen.okstate.edu/flows/MOSIS_SCMOS/osu_soc_v2.7/osu_soc_v2.7.tar.gz
@@ -53,6 +53,29 @@ Tutorial
     #qflow gui
     qflow -T osu035 map9v3
 
+   remove comments in qflow_exec.sh and run it.
 
+ run gui: 
+
+    mkdir test
+    cd test
+    mkdir source layout synthesis
+    cp .../map9v3.v source
+    qflow -T osu035 gui
+
+   it runs ok with prep, synth, place, static timing, rout, post rout sta, migrate, drc, 
+   but fails at lvs, not to gds.
+
+
+Performance
+=============
+
+ host windows 10 2018 feature 09, intel i7 6700HQ 2.6GHz 2601Mhz
+ virtual machine 4x60% cpu, 8192M memory
+
+    time cost in seconds for steps
+                synth    place    route   
+      map9v3    4.22     38.51    3.15    
+      picorv32  1m54.98  127m     31m6.11(failed)
 
 
